@@ -31,3 +31,13 @@
 
 # "temporary" build files
 /target
+/build
+
+.asscache
+
+# IntelliJ
+.idea
+*.iml
+
+# gradle
+.gradle
