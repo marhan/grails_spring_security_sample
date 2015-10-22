@@ -1,3 +1,5 @@
+import grails.spring.security.sample.GrailsAuthenticationProvider
+
 beans = {
-    authenticationProvider(grails.spring.security.sample.SimpleAuthenticationProvider)
+    authenticationProvider(GrailsAuthenticationProvider)
 }
