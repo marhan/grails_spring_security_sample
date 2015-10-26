@@ -19,9 +19,8 @@ public class ProviderSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/resources/**","/signup", "/").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/resources/**","/login", "/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
