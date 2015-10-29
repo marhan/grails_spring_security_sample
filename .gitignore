@@ -41,3 +41,6 @@
 
 # gradle
 .gradle
+
+# h2 database
+data

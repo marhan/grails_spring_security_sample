@@ -21,6 +21,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/role/**':						  ['ROLE_ADMIN'],
         '/registrationCode/**':			  ['ROLE_ADMIN'],
         '/securityInfo/**':			  	  ['ROLE_ADMIN'],
-        '/**': 							  ['permitAll']    ]
+        '/**': 							  ['isAuthenticated()']
+]
 
 grails.plugin.springsecurity.apf.storeLastUsername = true
