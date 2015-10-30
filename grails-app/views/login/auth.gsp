@@ -6,29 +6,61 @@
 
 <body role="document">
 
-<div class="container theme-showcase" role="main">
+<div class="container">
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="page-header">
         <h2>Login</h2>
     </div>
 
-    <form>
+    <g:if test='${flash.message}'>
+    <div class="alert alert-warning" role="alert">
+        <strong>Warning!</strong> ${flash.message}
+    </div>
 
-        <div class="col-md-8">
+    </g:if>
 
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">Username</span>
-                <input type="text" class="form-control" placeholder="Username"
-                       aria-describedby="basic-addon1">
+
+
+    <form action='${postUrl}' method='POST' id='loginForm' autocomplete='off'>
+
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Username"
+                       aria-describedby="basic-addon1"
+                       name="j_username"
+                       id="username">
+
             </div>
 
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <input type="checkbox" aria-label="...">
-                </span>
-                <input type="text" class="form-control" aria-label="..." value="Remember me">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password"
+                       class="form-control"
+                       placeholder="Password"
+                       aria-describedby="basic-addon1"
+                       name="j_password"
+                       id="password">
+
             </div>
+
+            <div class="form-group">
+                <div clas="row">
+                    <span class="input-group-lg">
+                        <input type="checkbox"
+                               name='${rememberMeParameter}'
+                               <g:if test='${hasCookie}'>checked='checked'</g:if>
+                               id='remember_me'>
+                    </span>
+                    <label for="remember_me">Remember me</label>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Log in</button>
 
         </div>
 
