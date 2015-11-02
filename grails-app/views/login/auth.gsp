@@ -14,11 +14,17 @@
     </div>
 
     <g:if test='${flash.message}'>
-    <div class="alert alert-warning" role="alert">
-        <strong>Warning!</strong> ${flash.message}
-    </div>
-
+        <div class="alert alert-warning" role="alert">
+            <strong>Warning!</strong> ${flash.message}
+        </div>
     </g:if>
+
+
+    <sec:ifNotLoggedIn>
+        <div class="alert alert-info" role="alert">
+            <strong>Info</strong> Please login to proceed
+        </div>
+    </sec:ifNotLoggedIn>
 
 
 
