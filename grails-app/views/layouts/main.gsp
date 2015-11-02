@@ -51,13 +51,19 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+
                 <sec:ifLoggedIn>
-                    <li><g:link controller="user" action="edit" id="${sec.loggedInUserInfo(field:'id')}">Logged in as <sec:username /></g:link></li>
+                    <li><g:link controller="user"
+                                action="edit"
+                                id="${sec.loggedInUserInfo(field:'id')}">Logged in as <sec:username /></g:link></li>
+
                     <li><g:link controller="logout">Logout</g:link></li>
                 </sec:ifLoggedIn>
+
                 <sec:ifNotLoggedIn>
                     <li><g:link controller="login" action='auth'>Login</g:link></li>
                 </sec:ifNotLoggedIn>
+
             </ul>
         </div><!--/.nav-collapse -->
     </div>
