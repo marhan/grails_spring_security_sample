@@ -35,7 +35,6 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
-                <li><g:link controller="login" action="auth">Login</g:link></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -50,6 +49,16 @@
                         <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <sec:ifLoggedIn>
+                    <li><g:link controller="user" action="edit" id="${sec.loggedInUserInfo(field:'id')}">Logged in as <sec:username /></g:link></li>
+                    <li><g:link controller="logout">Logout</g:link></li>
+                </sec:ifLoggedIn>
+                <sec:ifNotLoggedIn>
+                    <li><g:link controller="login" action='auth'>Login</g:link></li>
+                    <li><g:link controller="register" action='index'>Register</g:link></li>
+                </sec:ifNotLoggedIn>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
