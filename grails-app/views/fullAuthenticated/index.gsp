@@ -9,7 +9,7 @@
 <div class="container">
 
     <div class="page-header">
-        <h2>Fully Authenticated</h2>
+        <h2>Fully authenticated</h2>
     </div>
 
     <div class="well">
