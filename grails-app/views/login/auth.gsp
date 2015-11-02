@@ -54,7 +54,7 @@
                         <input type="checkbox"
                                name='${rememberMeParameter}'
                                <g:if test='${hasCookie}'>checked='checked'</g:if>
-                               id='remember_me'>
+                               id="remember_me">
                     </span>
                     <label for="remember_me">Remember me</label>
                 </div>

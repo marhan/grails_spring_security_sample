@@ -57,7 +57,6 @@
                 </sec:ifLoggedIn>
                 <sec:ifNotLoggedIn>
                     <li><g:link controller="login" action='auth'>Login</g:link></li>
-                    <li><g:link controller="register" action='index'>Register</g:link></li>
                 </sec:ifNotLoggedIn>
             </ul>
         </div><!--/.nav-collapse -->

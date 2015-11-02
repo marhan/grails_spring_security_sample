@@ -36,20 +36,20 @@ class DevelopmentDataPopulator {
 
     private void createUsers() {
 
-        def adminPopulator = new UserDataPopulator(
+        def adminCreator = new UserDataCreator(
                 baseUsername: ADMIN_USERNAME,
                 basePassword: ADMIN_PASSWORD,
                 authorities: [ROLE_ADMIN, ROLE_USER])
 
-        admin = adminPopulator.populate()[0]
+        admin = adminCreator.populate()[0]
 
-        def usersPopulator = new UserDataPopulator(
+        def usersCreator = new UserDataCreator(
                 baseUsername: 'user',
                 basePassword: 'password',
                 quantity: 3,
                 authorities: [ROLE_USER])
 
-        users = usersPopulator.populate()
+        users = usersCreator.populate()
 
     }
 

@@ -1,6 +1,6 @@
 package grails.spring.security.sample
 
-class UserDataPopulator {
+class UserDataCreator {
 
     String baseUsername
     String basePassword
