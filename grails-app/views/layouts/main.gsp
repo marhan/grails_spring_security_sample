@@ -46,8 +46,8 @@
                         <li><g:link controller="anonymousAuthenticated">Anonymous sufficient</g:link></li>
                         <li role="separator" class="divider"></li>
                         <li class="dropdown-header">Role based security</li>
-                        <li><a href="#">Admin role only</a></li>
-                        <li><a href="#">User role only</a></li>
+                        <li><g:link controller="roleAuthority" action="admin">Admin role only</g:link></li>
+                        <li><g:link controller="roleAuthority" action="user">User role only</g:link></li>
                     </ul>
                 </li>
             </ul>

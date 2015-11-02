@@ -6,8 +6,11 @@ import org.springframework.security.core.context.SecurityContextHolder
 
 class DevelopmentDataPopulator {
 
-    private static final String ADMIN_USERNAME = 'admin'
-    private static final String ADMIN_PASSWORD = 'admin123'
+    private static final String ADMIN_NAME = 'admin'
+    private static final String ADMIN_PASSWORD = 'password'
+
+    private static final String USER_NAME = 'user'
+    private static final String USER_PASSWORD = 'password'
 
     private static final String ROLE_ADMIN = 'ROLE_ADMIN'
     private static final String ROLE_USER = 'ROLE_USER'
@@ -28,7 +31,7 @@ class DevelopmentDataPopulator {
 
         // have to be authenticated as an admin to create ACLs
         SecurityContextHolder.context.authentication = new UsernamePasswordAuthenticationToken(
-                ADMIN_USERNAME,
+                ADMIN_NAME,
                 ADMIN_PASSWORD,
                 AuthorityUtils.createAuthorityList(ROLE_ADMIN))
 
@@ -37,15 +40,15 @@ class DevelopmentDataPopulator {
     private void createUsers() {
 
         def adminCreator = new UserDataCreator(
-                baseUsername: ADMIN_USERNAME,
+                baseUsername: ADMIN_NAME,
                 basePassword: ADMIN_PASSWORD,
-                authorities: [ROLE_ADMIN, ROLE_USER])
+                authorities: [ROLE_ADMIN])
 
         admin = adminCreator.populate()[0]
 
         def usersCreator = new UserDataCreator(
-                baseUsername: 'user',
-                basePassword: 'password',
+                baseUsername: USER_NAME,
+                basePassword: USER_PASSWORD,
                 quantity: 3,
                 authorities: [ROLE_USER])
 
