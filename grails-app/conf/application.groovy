@@ -25,3 +25,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 grails.plugin.springsecurity.apf.storeLastUsername = true
+
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'grails.spring.security.sample.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'grails.spring.security.sample.UserRole'
+grails.plugin.springsecurity.authority.className = 'grails.spring.security.sample.Role'
+grails.plugin.springsecurity.logout.postOnly = false
