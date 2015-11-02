@@ -14,6 +14,8 @@
 
     <div class="well">
         <p>You are fully authenticated.</p>
+
+        <p>This Page requires the user to be fully authenticated with an explicit login.</p>
     </div>
 
 </div>
