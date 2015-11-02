@@ -1,4 +1,4 @@
-package grails.spring.security.sample.sample
+package grails.spring.security.sample
 
 import grails.plugin.springsecurity.annotation.Secured;
 

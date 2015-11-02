@@ -43,6 +43,7 @@
                         <li class="dropdown-header">Login based security</li>
                         <li><g:link controller="fullAuthenticated">Full authenticated only</g:link></li>
                         <li><g:link controller="rememberedAuthenticated">Remember me sufficient</g:link></li>
+                        <li><g:link controller="anonymousAuthenticated">Anonymous sufficient</g:link></li>
                         <li role="separator" class="divider"></li>
                         <li class="dropdown-header">Role based security</li>
                         <li><a href="#">Admin role only</a></li>
