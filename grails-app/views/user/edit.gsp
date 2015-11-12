@@ -17,10 +17,19 @@
 
         <div class="col-md-4">
 
+            <g:hasErrors>
+                <div class="alert alert-warning" role="alert">
+                    Please review the input
+                </div>
+            </g:hasErrors>
+
+
             <input type="hidden" formmethod="post" name="id" value="${user?.id}">
 
-            <div class="form-group">
+            <div class="form-group <g:hasErrors bean="${user}" field="username">has-error</g:hasErrors>">
+
                 <label for="username">Username</label>
+
                 <input type="text"
                        class="form-control"
                        placeholder="Username"
@@ -29,10 +38,19 @@
                        value="${user?.username}"
                        id="username">
 
+                <g:hasErrors bean="${user}" field="username">
+                    <div class="alert alert-danger" role="alert">
+                        <g:fieldError bean="${user}" field="username"/>
+                    </div>
+                </g:hasErrors>
+
             </div>
 
-            <div class="form-group">
+
+            <div class="form-group <g:hasErrors bean="${user}" field="email">has-error</g:hasErrors>">
+
                 <label for="email">Username</label>
+
                 <input type="text"
                        class="form-control"
                        placeholder="Email"
@@ -41,10 +59,19 @@
                        value="${user?.email}"
                        id="email">
 
+                <g:hasErrors bean="${user}" field="email">
+                    <div class="alert alert-danger" role="alert">
+                        <g:fieldError bean="${user}" field="email"/>
+                    </div>
+                </g:hasErrors>
+
             </div>
 
-            <div class="form-group">
+
+            <div class="form-group <g:hasErrors bean="${user}" field="password">has-error</g:hasErrors>">
+
                 <label for="password">Password</label>
+
                 <input type="password"
                        class="form-control"
                        placeholder="Password"
@@ -52,10 +79,15 @@
                        name="password"
                        id="password">
 
+                <g:hasErrors bean="${user}" field="password">
+                    <div class="alert alert-danger" role="alert">
+                        <g:fieldError bean="${user}" field="password"/>
+                    </div>
+                </g:hasErrors>
+
             </div>
 
-            <button class="btn btn-primary" type="submit">Update</button>
-
+            <button class="btn btn-primary" type="submit">Save changes</button>
         </div>
 
     </form>

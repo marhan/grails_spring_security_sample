@@ -15,14 +15,14 @@ class UserController {
         user.username = params.username
         user.password = params.password
 
-        user.save(flush: true)
+        user.save()
 
         if (user.hasErrors()) {
-            render edit: 'edit', model: [user: user]
+            render view: 'edit', model: [user: user]
             return
         }
 
-        render view: 'edit', model: [user: user]
+        redirect action: 'edit', id: user.id
 
     }
 }
