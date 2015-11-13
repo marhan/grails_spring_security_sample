@@ -10,8 +10,38 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h2>Bootstrap and <a href="http://fontawesome.io/examples/">Font Awesome</a> LESS Example</h2>
+        <h2><a href="https://grails.org/">Grails 3</a> sample project with
+            <a href="https://bintray.com/grails/plugins/org.grails.plugins%3Aspring-security-core/">
+                Spring Security Core Plugin
+            </a>
+        </h2>
     </div>
+
+    <div class="page-header">
+        <h1>Prepared users</h1>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><g:link controller="user" action="edit" id="1">admin</g:link></td>
+            <td>password</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><g:link controller="user" action="edit" id="2">user1</g:link></td>
+            <td>password1</td>
+        </tr>
+        </tbody>
+    </table>
 
 
     <div class="page-header">
