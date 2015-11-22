@@ -16,26 +16,46 @@ class UserController {
 
         User user = User.get(params.id)
 
+        def loggedInUser = springSecurityService.currentUser
+
+        if (loggedInUser.id != user.id) {
+            def message = "User ${loggedInUser} has tried to edit ${user}!"
+            log.info(message)
+            throw new AccessDeniedException(message)
+        }
+
+        log.debug("User ${user} is going to be edit his data!")
+
+        def command = new UserUpateCommand('id': user.id, 'username': user.username, 'email': user.email)
+        render view: 'edit', model: [user: command]
+    }
+
+    def update(UserUpateCommand command) {
+
+        if(command.id == null) {
+            redirect action: 'edit'
+        }
+
+        User user = User.get(command.id)
+
+        if(!user) {
+            throw new Exception("Not user found for id ${command.id}")
+        }
 
         def loggedInUser = springSecurityService.currentUser
 
         if (loggedInUser.id != user.id) {
-
             def message = "User ${loggedInUser} has tried to edit ${user}!"
             log.info(message)
             throw new AccessDeniedException(message)
-
         }
 
-        if (request.method == 'GET') {
-            log.debug("User ${user} is going to be edit his data!")
-            render view: 'edit', model: [user: user]
-            return
-        }
+        user.email = command.email
+        user.username = command.username
 
-        user.email = params.email
-        user.username = params.username
-        user.password = params.password
+        if(command.password != null && !command.password.isEmpty()) {
+            user.password = springSecurityService.encodePassword(command.password)
+        }
 
         user.save()
 
@@ -50,4 +70,27 @@ class UserController {
         redirect action: 'edit', id: user.id
 
     }
+
+}
+
+class UserUpateCommand {
+
+    Long id
+    String email
+    String username
+    String password
+    String passwordRepeat
+
+    static constraints = {
+        importFrom User
+        password(size: 6..50, blank: false,
+                validator: { passwd, urc ->
+                    return passwd != urc.username
+                })
+        passwordRepeat(nullable: false,
+                validator: { passwd2, urc ->
+                    return passwd2 == urc.password
+                })
+    }
+
 }

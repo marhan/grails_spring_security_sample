@@ -13,7 +13,7 @@
         <h2>Edit User Data</h2>
     </div>
 
-    <form action='${postUrl}' method='POST'>
+    <g:form controller="user" action="update" method='POST'>
 
         <div class="col-md-4">
 
@@ -87,10 +87,29 @@
 
             </div>
 
+            <div class="form-group <g:hasErrors bean="${user}" field="password">has-error</g:hasErrors>">
+
+                <label for="passwordRepeat">Password Repeat</label>
+
+                <input type="password"
+                       class="form-control"
+                       placeholder="Password"
+                       aria-describedby="basic-addon1"
+                       name="passwordRepeat"
+                       id="passwordRepeat">
+
+                <g:hasErrors bean="${user}" field="passwordRepeat">
+                    <div class="alert alert-danger" role="alert">
+                        <g:fieldError bean="${user}" field="passwordRepeat"/>
+                    </div>
+                </g:hasErrors>
+
+            </div>
+
             <button class="btn btn-primary" type="submit">Save changes</button>
         </div>
 
-    </form>
+    </g:form>
 
 </div>
 </body>
