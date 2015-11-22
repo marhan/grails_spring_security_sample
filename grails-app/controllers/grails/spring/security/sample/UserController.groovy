@@ -4,7 +4,6 @@ import grails.plugin.springsecurity.annotation.Secured
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.security.access.AccessDeniedException
-import org.springframework.security.core.Authentication
 
 @Secured(['IS_AUTHENTICATED_FULLY'])
 class UserController {
@@ -20,16 +19,16 @@ class UserController {
 
         def loggedInUser = springSecurityService.currentUser
 
-        if(loggedInUser.id != user.id) {
+        if (loggedInUser.id != user.id) {
 
-            log.info("User ${loggedInUser} has tried to edit ${user}!")
-
-            throw new AccessDeniedException("Access is denied. You are not allowed to edit user with id ${params.id}")
+            def message = "User ${loggedInUser} has tried to edit ${user}!"
+            log.info(message)
+            throw new AccessDeniedException(message)
 
         }
 
         if (request.method == 'GET') {
-            log.debug("User ${user} is going to be edit his uder data!")
+            log.debug("User ${user} is going to be edit his data!")
             render view: 'edit', model: [user: user]
             return
         }

@@ -18,7 +18,7 @@
         </div>
 
         <div class="panel-body">
-            We're sorry, but you are not authorized to perform the requested operation.
+            ${errorDetails.message}
         </div>
     </div>
 
