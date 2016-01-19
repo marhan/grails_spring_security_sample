@@ -18,7 +18,7 @@
             <h3 class="panel-title">You are not authorized to see the page you have requested</h3>
         </div>
         <div class="panel-body">
-            you have the ? authority.
+            You don't have the authority.
         </div>
     </div>
 

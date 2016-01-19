@@ -12,10 +12,14 @@
         <h2>User authority</h2>
     </div>
 
-    <div class="well">
-        <p>You have the user authority.</p>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">You have the user authority</h3>
+        </div>
 
-        <p>This page requires the authority 'ROLE_USER'.</p>
+        <div class="panel-body">
+            This page requires the authority 'ROLE_USER'.
+        </div>
     </div>
 
 </div>

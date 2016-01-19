@@ -38,7 +38,7 @@
                        class="form-control"
                        placeholder="Username"
                        aria-describedby="basic-addon1"
-                       name="j_username"
+                       name="username"
                        id="username">
 
             </div>
@@ -49,7 +49,7 @@
                        class="form-control"
                        placeholder="Password"
                        aria-describedby="basic-addon1"
-                       name="j_password"
+                       name="password"
                        id="password">
 
             </div>

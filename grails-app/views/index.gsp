@@ -17,31 +17,89 @@
         </h2>
     </div>
 
-    <div class="page-header">
-        <h1>Prepared users</h1>
-    </div>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>Username</th>
-            <th>Password</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td><g:link controller="user" action="edit" id="1">admin</g:link></td>
-            <td>password</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td><g:link controller="user" action="edit" id="2">user1</g:link></td>
-            <td>password1</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row">
+
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><g:link controller="user" action="edit" id="1">admin</g:link></td>
+                    <td>password</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><g:link controller="user" action="edit" id="2">user1</g:link></td>
+                    <td>password1</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Security property</th>
+                    <th>Value of property</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Principal Enabled</td>
+                    <td>
+                        <sec:loggedInUserInfo field="enabled"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Logged in</td>
+                    <td>
+                        <sec:ifLoggedIn>true</sec:ifLoggedIn>
+                        <sec:ifNotLoggedIn>false</sec:ifNotLoggedIn>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Switched</td>
+                    <td>
+                        <sec:ifSwitched>true</sec:ifSwitched>
+                        <sec:ifNotSwitched>false</sec:ifNotSwitched>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Granted roles</td>
+                    <td>
+                        <sec:ifAnyGranted roles="ROLE_USER">USER_ROLE</sec:ifAnyGranted>
+                        <sec:ifAnyGranted roles="ADMIN_USER">, ADMIN_ROLE</sec:ifAnyGranted>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 
     <div class="page-header">
