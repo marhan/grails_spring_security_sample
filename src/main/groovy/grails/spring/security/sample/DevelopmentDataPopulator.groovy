@@ -49,7 +49,7 @@ class DevelopmentDataPopulator {
         def usersCreator = new UserDataCreator(
                 baseUsername: USER_NAME,
                 basePassword: USER_PASSWORD,
-                quantity: 3,
+                quantity: 1,
                 authorities: [ROLE_USER])
 
         users = usersCreator.populate()

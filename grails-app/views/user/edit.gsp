@@ -13,15 +13,20 @@
         <h2>Edit User Data</h2>
     </div>
 
-    <g:form controller="user" action="update" method='POST'>
+    <g:form controller="user" action="update" method='POST' useToken="true">
 
         <div class="col-md-4">
 
             <g:hasErrors>
                 <div class="alert alert-warning" role="alert">
-                    Please review the input
+                    <g:message message="userEdit.hasErrors" args=""/>
                 </div>
             </g:hasErrors>
+            <g:if test='${flash.message}'>
+                <div class="alert alert-info" role="info">
+                    <g:message message="${flash.message}" args="${flash.args}"/>
+                </div>
+            </g:if>
 
 
             <input type="hidden" formmethod="post" name="id" value="${user?.id}">
@@ -87,13 +92,13 @@
 
             </div>
 
-            <div class="form-group <g:hasErrors bean="${user}" field="password">has-error</g:hasErrors>">
+            <div class="form-group <g:hasErrors bean="${user}" field="passwordRepeat">has-error</g:hasErrors>">
 
                 <label for="passwordRepeat">Password Repeat</label>
 
                 <input type="password"
                        class="form-control"
-                       placeholder="Password"
+                       placeholder="Repeat password"
                        aria-describedby="basic-addon1"
                        name="passwordRepeat"
                        id="passwordRepeat">

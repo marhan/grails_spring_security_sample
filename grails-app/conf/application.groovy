@@ -26,7 +26,7 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'grails.spring.
 grails.plugin.springsecurity.authority.className = 'grails.spring.security.sample.Role'
 grails.plugin.springsecurity.logout.postOnly = false
 
-grails.plugin.springsecurity.rememberMe.cookieName = "grails_spring_security_example_cookie"
+grails.plugin.springsecurity.rememberMe.cookieName = "grails_spring_security_sample_cookie"
 grails.plugin.springsecurity.rememberMe.tokenValiditySeconds = 60 * 60 * 24 * 2
 
 grails.plugin.springsecurity.rememberMe.persistent = true

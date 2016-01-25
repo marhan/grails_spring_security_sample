@@ -1,6 +1,7 @@
 package grails.spring.security.sample
 
 import grails.plugin.springsecurity.annotation.Secured
+import grails.transaction.Transactional
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.security.access.AccessDeniedException
@@ -26,54 +27,65 @@ class UserController {
 
         log.debug("User ${user} is going to be edit his data!")
 
-        def command = new UserUpateCommand('id': user.id, 'username': user.username, 'email': user.email)
+        def command = new UserUpdateCommand('id': user.id, 'username': user.username, 'email': user.email)
         render view: 'edit', model: [user: command]
     }
 
-    def update(UserUpateCommand command) {
+    @Transactional
+    def update(UserUpdateCommand command) {
 
-        if(command.id == null) {
-            redirect action: 'edit'
+        withForm {
+
+            if (command.id == null) {
+                redirect action: 'edit'
+            }
+
+            if (command.hasErrors()) {
+                render view: 'edit', model: [user: command, id: params.id]
+                return
+            }
+
+            User user = User.get(command.id)
+
+            if (!user) {
+                throw new Exception("Not user found for id ${command.id}")
+            }
+
+            def loggedInUser = springSecurityService.currentUser
+
+            if (loggedInUser.id != user.id) {
+                def message = "User ${loggedInUser} has tried to edit ${user}!"
+                log.info(message)
+                throw new AccessDeniedException(message)
+            }
+
+            user.properties['email', 'username'] = command.properties
+
+            if (command.password) {
+                user.password = springSecurityService.encodePassword(command.password)
+            }
+
+            user.save()
+
+            if (user.hasErrors()) {
+                log.debug("User data ${user} cant't be stored, due to errors!")
+                render view: 'edit', model: [user: user]
+                return
+            }
+
+            log.info("User data ${user} successfully saved")
+
+            flash.message = message(code: 'userEdit.update.successful', args: '')
+
+            redirect action: 'edit', id: user.id
+
+        }.invalidToken {
+            render "Invalid or duplicate form submission"
         }
-
-        User user = User.get(command.id)
-
-        if(!user) {
-            throw new Exception("Not user found for id ${command.id}")
-        }
-
-        def loggedInUser = springSecurityService.currentUser
-
-        if (loggedInUser.id != user.id) {
-            def message = "User ${loggedInUser} has tried to edit ${user}!"
-            log.info(message)
-            throw new AccessDeniedException(message)
-        }
-
-        user.email = command.email
-        user.username = command.username
-
-        if(command.password != null && !command.password.isEmpty()) {
-            user.password = springSecurityService.encodePassword(command.password)
-        }
-
-        user.save()
-
-        if (user.hasErrors()) {
-            log.debug("User data ${user} cant't be stored, due to errors!")
-            render view: 'edit', model: [user: user]
-            return
-        }
-
-        log.info("User data ${user} successfully saved")
-
-        redirect action: 'edit', id: user.id
-
     }
-
 }
 
-class UserUpateCommand {
+class UserUpdateCommand implements grails.validation.Validateable {
 
     Long id
     String email
@@ -82,15 +94,53 @@ class UserUpateCommand {
     String passwordRepeat
 
     static constraints = {
-        importFrom User
-        password(size: 6..50, blank: false,
-                validator: { passwd, urc ->
-                    return passwd != urc.username
-                })
-        passwordRepeat(nullable: false,
-                validator: { passwd2, urc ->
-                    return passwd2 == urc.password
-                })
+        importFrom User, include: ['email, username']
+
+        username(size: 4..50, blank: false, nullable: false,
+                validator: { value, urc ->
+                    User user = User.findByUsername(urc.username, [max: 1])
+                    if (user && user.id != urc.id) {
+                        return 'userEdit.username.alreadyExist'
+                    }
+                }
+        )
+
+        email(email: true,
+                validator: { value, urc ->
+                    User user = User.findByEmail(urc.email, [max: 1])
+                    if (user && user.id != urc.id) {
+                        return 'userEdit.email.alreadyExist'
+                    }
+
+                }
+        )
+
+        password(size: 6..50, blank: true, nullable: true,
+                validator: { value, urc ->
+
+                    if (urc?.passwordRepeat != value) {
+                        return 'userEdit.passwordAndPasswordRepeat.mismatch'
+                    }
+
+                    if (value == urc.username) {
+                        return 'userEdit.usernameAndPassword.mustNotMatch'
+                    }
+
+                    true
+                }
+        )
+
+        passwordRepeat(blank: true, nullable: true,
+                validator: { value, urc ->
+
+                    if (urc?.password != value) {
+                        return 'userEdit.passwordAndPasswordRepeat.mismatch'
+                    }
+
+                    true
+                }
+        )
     }
+
 
 }
