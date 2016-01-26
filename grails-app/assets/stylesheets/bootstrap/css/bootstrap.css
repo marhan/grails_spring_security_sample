@@ -1588,7 +1588,6 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-
 @media (min-width: 768px) {
   .container {
     width: 750px;
@@ -6799,8 +6798,3 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-
-/* custom adjustments */
-body > .container {
-  padding: 40px 15px 0;
-}
