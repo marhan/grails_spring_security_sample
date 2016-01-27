@@ -78,7 +78,6 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-autoconfigure"
-    compile "org.springframework.boot:spring-boot-starter-tomcat"
     compile "org.springframework.boot:spring-boot-starter-security"
 
     compile "org.hibernate:hibernate-ehcache"
@@ -100,6 +99,8 @@ dependencies {
 
     // Note: It is recommended to update to a more robust driver (Chrome, Firefox etc.)
     testRuntime 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.44.0'
+
+    provided "org.springframework.boot:spring-boot-starter-tomcat"
 
 }
 
